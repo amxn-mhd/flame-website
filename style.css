@@ -890,3 +890,75 @@ footer {
     column-count: 1;
   }
 }
+
+/* Launch Overlay Styles */
+.launch-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: 
+    radial-gradient(circle 480px at var(--cursor-x) var(--cursor-y), rgba(11, 92, 167, 0.05), transparent 80%),
+    radial-gradient(circle 380px at var(--cursor-x) var(--cursor-y), rgba(223, 145, 38, 0.04), transparent 70%),
+    var(--color-bg-base);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.launch-content {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.launch-logo {
+  max-width: 240px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.launch-badge {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-primary-blue);
+  background-color: var(--color-primary-blue-light);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+}
+
+.launch-title {
+  font-family: var(--font-serif);
+  font-size: 3.8rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.launch-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 480px;
+  font-family: var(--font-sans);
+}
+
+.launch-footer {
+  margin-top: 40px;
+  font-size: 0.85rem;
+  color: #94A3B8;
+  font-family: var(--font-sans);
+}

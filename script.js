@@ -74,4 +74,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // --- 5. Secret Launch Overlay Dismiss ---
+  const launchOverlay = document.querySelector('.launch-overlay');
+  const launchFooter = document.querySelector('.launch-footer');
+  if (launchOverlay && launchFooter) {
+    launchFooter.addEventListener('click', () => {
+      launchOverlay.style.opacity = '0';
+      launchOverlay.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      setTimeout(() => {
+        launchOverlay.style.display = 'none';
+      }, 600);
+    });
+  }
 });
