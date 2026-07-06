@@ -899,18 +899,21 @@ footer {
   width: 100vw;
   height: 100vh;
   background: 
-    radial-gradient(circle 480px at var(--cursor-x) var(--cursor-y), rgba(11, 92, 167, 0.05), transparent 80%),
-    radial-gradient(circle 380px at var(--cursor-x) var(--cursor-y), rgba(223, 145, 38, 0.04), transparent 70%),
+    radial-gradient(circle 480px at var(--cursor-x) var(--cursor-y), rgba(11, 92, 167, 0.06), transparent 80%),
+    radial-gradient(circle 380px at var(--cursor-x) var(--cursor-y), rgba(223, 145, 38, 0.05), transparent 70%),
     var(--color-bg-base);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
+  overflow: hidden; /* Prevent blobs from triggering scrollbars */
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .launch-content {
+  position: relative;
+  z-index: 10; /* Guaranteed to be in front of the blobs */
   max-width: 600px;
   width: 100%;
   text-align: center;
@@ -961,4 +964,47 @@ footer {
   font-size: 0.85rem;
   color: #94A3B8;
   font-family: var(--font-sans);
+}
+
+/* Floating Background Blobs (Antigravity Parallax effect) */
+.floating-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  -webkit-filter: blur(60px);
+  pointer-events: none;
+  z-index: -1; /* Defaults behind main page content */
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.85; /* Reverted to higher opacity to ensure solid visibility */
+}
+
+.launch-overlay .floating-blob {
+  z-index: 2; /* Sits above the launch-overlay background, but below launch-content */
+}
+
+.blob-1 {
+  width: 320px;
+  height: 320px;
+  background: rgba(11, 92, 167, 0.22); /* Restored semi-transparent blue */
+  top: 15%;
+  left: 8%;
+}
+
+.blob-2 {
+  width: 280px;
+  height: 280px;
+  background: rgba(223, 145, 38, 0.18); /* Restored semi-transparent gold */
+  bottom: 15%;
+  right: 8%;
+}
+
+/* Main Site BG Blobs styling adjustment */
+.interactive-bg .floating-blob {
+  z-index: -1;
+  opacity: 0.75;
+}
+
+body.lock-scroll {
+  overflow: hidden;
+  height: 100vh;
 }

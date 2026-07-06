@@ -87,4 +87,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 600);
     });
   }
+
+  // --- 6. Floating Blobs Parallax Cursor Effect ---
+  const floatingBlobs = document.querySelectorAll('.floating-blob');
+  window.addEventListener('mousemove', (e) => {
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    const offsetX = (e.clientX - centerX) * 0.08;
+    const offsetY = (e.clientY - centerY) * 0.08;
+
+    floatingBlobs.forEach((blob, index) => {
+      const direction = index % 2 === 0 ? 1 : -1;
+      blob.style.transform = `translate(${offsetX * direction}px, ${offsetY * direction}px)`;
+    });
+  });
 });
