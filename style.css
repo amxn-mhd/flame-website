@@ -904,10 +904,12 @@ footer {
     var(--color-bg-base);
   z-index: 9999;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  overflow: hidden; /* Prevent blobs from triggering scrollbars */
+  justify-content: flex-start; /* Start from top to allow scrolling */
+  padding: 60px 20px;
+  overflow-y: auto; /* Enable scroll if content is taller than viewport */
+  -webkit-overflow-scrolling: touch; /* Smooth iOS inertia scroll */
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -921,6 +923,7 @@ footer {
   flex-direction: column;
   align-items: center;
   gap: 24px;
+  margin: auto 0; /* Centers vertically if there is space, scrolls normally if not */
   animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -968,7 +971,7 @@ footer {
 
 /* Floating Background Blobs (Antigravity Parallax effect) */
 .floating-blob {
-  position: absolute;
+  position: fixed; /* Keep blobs fixed in background during overlay scrolling */
   border-radius: 50%;
   filter: blur(60px);
   -webkit-filter: blur(60px);
