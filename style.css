@@ -329,6 +329,7 @@ section {
   color: var(--color-primary-blue);
   margin-bottom: 15px;
   display: block;
+  line-height: 1.5;
 }
 
 .section-title {
