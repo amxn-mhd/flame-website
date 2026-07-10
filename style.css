@@ -150,6 +150,26 @@ nav a:hover::after {
   width: 100%;
 }
 
+nav a.header-cta-link {
+  color: var(--color-primary-gold) !important;
+  font-weight: 700;
+  border: 2px solid var(--color-primary-gold);
+  padding: 6px 18px;
+  border-radius: 50px;
+  background: rgba(223, 145, 38, 0.05);
+  transition: all 0.3s ease;
+}
+
+nav a.header-cta-link::after {
+  display: none !important;
+}
+
+nav a.header-cta-link:hover {
+  background: var(--color-primary-gold) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(223, 145, 38, 0.15);
+}
+
 .cta-btn {
   background: var(--color-primary-blue);
   color: white;
@@ -1011,3 +1031,604 @@ body.lock-scroll {
   overflow: hidden;
   height: 100vh;
 }
+
+/* Social Media Hub Styles */
+.social-tab-btn {
+  background: white;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.social-tab-btn:hover {
+  border-color: var(--color-primary-blue);
+  color: var(--color-primary-blue);
+  transform: translateY(-2px);
+}
+
+.social-tab-btn.active {
+  background: var(--color-primary-blue);
+  border-color: var(--color-primary-blue);
+  color: white;
+  box-shadow: 0 4px 15px rgba(11, 92, 167, 0.2);
+}
+
+.social-feed-panel {
+  display: none;
+  opacity: 0;
+}
+
+.social-feed-panel.active {
+  display: block;
+  animation: tabFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes tabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Facebook Card Design */
+.fb-card {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+
+.fb-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(11, 92, 167, 0.15);
+}
+
+.fb-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.fb-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.fb-user-details h5 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.fb-verified {
+  background: #1877F2;
+  color: white;
+  font-size: 0.65rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fb-user-details span {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.fb-follow-btn {
+  margin-left: auto;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary-blue);
+  text-decoration: none;
+  background: var(--color-primary-blue-light);
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: var(--transition-smooth);
+}
+
+.fb-follow-btn:hover {
+  background: var(--color-primary-blue);
+  color: white;
+}
+
+.fb-card-body p {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--color-text-main);
+  margin: 0 0 14px 0;
+}
+
+.fb-post-media {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.fb-post-media img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.fb-card-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--color-border);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fb-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.fb-action-btn {
+  text-align: center;
+  background: var(--color-bg-base);
+  color: var(--color-text-main);
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid var(--color-border);
+  transition: var(--transition-smooth);
+}
+
+.fb-action-btn:hover {
+  background: var(--color-primary-blue);
+  color: white;
+  border-color: var(--color-primary-blue);
+}
+
+/* Instagram Card Design */
+.ig-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  box-shadow: var(--shadow-sm);
+  display: block;
+}
+
+.ig-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.ig-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.ig-card:hover img {
+  transform: scale(1.08);
+}
+
+.ig-card:hover .ig-overlay {
+  opacity: 1;
+}
+
+.ig-likes, .ig-comments {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Achievements Section Styles */
+.timeline-container {
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+  position: relative;
+  padding: 0 40px;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 23px;
+  left: 40px;
+  right: 40px;
+  height: 4px;
+  background: var(--color-border);
+  z-index: 1;
+}
+
+.timeline-years {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-year-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+}
+
+.timeline-year-btn .dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 4px solid var(--color-border);
+  transition: var(--transition-smooth);
+}
+
+.timeline-year-btn .label {
+  margin-top: 12px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  transition: var(--transition-smooth);
+}
+
+.timeline-year-btn:hover .dot {
+  border-color: var(--color-primary-blue);
+  transform: scale(1.15);
+}
+
+.timeline-year-btn.active .dot {
+  border-color: var(--color-primary-blue);
+  background: var(--color-primary-blue);
+  box-shadow: 0 0 12px rgba(11, 92, 167, 0.4);
+}
+
+.timeline-year-btn.active .label {
+  color: var(--color-primary-blue);
+  font-weight: 700;
+}
+
+/* Dashboard Panel Layout */
+.milestone-card {
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  justify-content: center;
+}
+
+.milestone-year-tag {
+  align-self: flex-start;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-primary-blue);
+  background: var(--color-primary-blue-light);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-family: var(--font-sans);
+}
+
+.milestone-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+  margin: 18px 0 12px 0;
+  line-height: 1.2;
+}
+
+.milestone-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin: 0 0 30px 0;
+  font-family: var(--font-sans);
+}
+
+.milestone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.milestone-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.milestone-icon {
+  font-size: 1.4rem;
+  background: white;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+}
+
+.milestone-item h6 {
+  margin: 0 0 4px 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  font-family: var(--font-sans);
+}
+
+.milestone-item p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  font-family: var(--font-sans);
+}
+
+/* Graph Card Layout */
+.graph-card {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: var(--shadow-sm);
+  align-self: stretch;
+}
+
+.chart-container {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  height: 300px;
+  margin-top: 10px;
+}
+
+.chart-y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 220px;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: right;
+  padding-right: 15px;
+  font-family: var(--font-sans);
+  border-right: 2px solid var(--color-border);
+}
+
+.chart-bars-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 220px;
+  padding: 0 10px;
+  position: relative;
+}
+
+.chart-bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70px;
+}
+
+.chart-bar-track {
+  height: 190px;
+  width: 28px;
+  background: #F1F5F9;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 30px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bar-blue {
+  background: linear-gradient(180deg, var(--color-primary-blue) 0%, rgba(11, 92, 167, 0.8) 100%);
+  box-shadow: 0 4px 10px rgba(11, 92, 167, 0.15);
+}
+
+.bar-gold {
+  background: linear-gradient(180deg, var(--color-primary-gold) 0%, rgba(223, 145, 38, 0.8) 100%);
+  box-shadow: 0 4px 10px rgba(223, 145, 38, 0.15);
+}
+
+.bar-value {
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-top: 8px;
+  font-family: var(--font-sans);
+  animation: valFadeIn 0.3s ease forwards;
+}
+
+@keyframes valFadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bar-label {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-text-main);
+  margin-top: 12px;
+  text-align: center;
+  font-family: var(--font-sans);
+}
+
+.bar-sub-label {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  font-family: var(--font-sans);
+  margin-top: 2px;
+}
+
+@media (max-width: 968px) {
+  .achievements-dashboard {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+  
+  .chart-bar-col {
+    width: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .timeline-container {
+    padding: 0 10px;
+  }
+  .timeline-line {
+    left: 10px;
+    right: 10px;
+  }
+  .chart-bar-col {
+    width: 50px;
+  }
+  .chart-bar-track {
+    width: 22px;
+  }
+  .bar-sub-label {
+    display: none;
+  }
+}
+
+/* Connect to Minister Desk Cards styling */
+.connect-minister-section {
+  background-color: white;
+  position: relative;
+}
+
+.desk-card {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 35px 30px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  transition: var(--transition-smooth);
+}
+
+.desk-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(11, 92, 167, 0.15);
+}
+
+.desk-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-family: var(--font-sans);
+}
+
+.desk-card h3 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+}
+
+.desk-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+}
+
+.desk-cta-btn {
+  margin-top: auto;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-primary-blue);
+  text-decoration: none;
+  font-family: var(--font-sans);
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.desk-cta-btn:hover {
+  color: var(--color-primary-gold);
+  transform: translateX(4px);
+}
+
+
+
+
