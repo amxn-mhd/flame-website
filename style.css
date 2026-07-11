@@ -1029,6 +1029,41 @@ footer {
   font-family: var(--font-sans);
 }
 
+@media (max-width: 600px) {
+  .launch-overlay {
+    padding: 30px 15px !important;
+  }
+  .launch-content {
+    margin: 20px 0 !important;
+    gap: 16px !important;
+  }
+  .launch-logo {
+    max-width: 150px !important;
+    margin-bottom: 5px !important;
+  }
+  .launch-initiative {
+    max-width: 130px !important;
+  }
+  .launch-title {
+    font-size: 2.2rem !important;
+  }
+  .launch-text {
+    font-size: 0.92rem !important;
+    line-height: 1.5 !important;
+  }
+  .launch-footer {
+    margin-top: 20px !important;
+    font-size: 0.82rem !important;
+    padding: 10px 20px !important;
+    border: 1px dashed rgba(11, 92, 167, 0.25) !important;
+    border-radius: 8px !important;
+    background: rgba(11, 92, 167, 0.03) !important;
+    width: auto !important;
+    display: inline-block !important;
+    cursor: pointer;
+  }
+}
+
 /* Floating Background Blobs (Antigravity Parallax effect) */
 .floating-blob {
   position: fixed; /* Keep blobs fixed in background during overlay scrolling */
