@@ -150,7 +150,7 @@ nav a:hover::after {
   width: 100%;
 }
 
-nav a.header-cta-link {
+a.header-cta-link {
   color: var(--color-primary-gold) !important;
   font-weight: 700;
   border: 2px solid var(--color-primary-gold);
@@ -158,13 +158,14 @@ nav a.header-cta-link {
   border-radius: 50px;
   background: rgba(223, 145, 38, 0.05);
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
-nav a.header-cta-link::after {
+a.header-cta-link::after {
   display: none !important;
 }
 
-nav a.header-cta-link:hover {
+a.header-cta-link:hover {
   background: var(--color-primary-gold) !important;
   color: white !important;
   box-shadow: 0 4px 12px rgba(223, 145, 38, 0.15);
