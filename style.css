@@ -189,6 +189,10 @@ nav a.header-cta-link:hover {
   box-shadow: 0 6px 20px rgba(11, 92, 167, 0.3);
 }
 
+.header-mobile-cta {
+  display: none !important;
+}
+
 .mobile-menu-toggle {
   display: none;
   background: none;
@@ -838,6 +842,25 @@ footer {
     font-size: 1.1rem;
   }
   
+  nav .header-cta-link {
+    display: none !important;
+  }
+
+  .header-mobile-cta {
+    display: inline-block !important;
+    font-size: 0.8rem !important;
+    padding: 5px 12px !important;
+  }
+
+  @media (max-width: 580px) {
+    .header-mobile-cta {
+      display: none !important;
+    }
+    nav .header-cta-link {
+      display: block !important;
+    }
+  }
+
   .mobile-menu-toggle {
     display: block;
   }
