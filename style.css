@@ -788,7 +788,22 @@ footer {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1250px) {
+  nav ul {
+    gap: 15px !important;
+  }
+  nav a {
+    font-size: 0.88rem !important;
+  }
+  nav a.header-cta-link {
+    padding: 5px 12px !important;
+  }
+  header {
+    padding: 0 30px !important;
+  }
+}
+
+@media (max-width: 1024px) {
   header {
     padding: 0 20px;
   }
