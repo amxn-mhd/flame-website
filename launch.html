@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLAME - Official Launch Ceremony</title>
+  <link rel="icon" type="image/png" href="assets/flame-favicon.png">
+  <!-- Load outfit and plus jakarta sans fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Load canvas-confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --color-primary-blue: #0B5CA7;
+      --color-primary-gold: #DF9126;
+      --color-light-bg: #F8FAFC;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-serif: 'Outfit', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--color-light-bg);
+      color: #0F172A;
+      font-family: var(--font-sans);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Ambient Background Lights */
+    .bg-light {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.08;
+    }
+
+    .light-blue {
+      width: 400px;
+      height: 400px;
+      background: var(--color-primary-blue);
+      top: 15%;
+      left: 10%;
+      animation: floatLight 10s ease-in-out infinite alternate;
+    }
+
+    .light-gold {
+      width: 350px;
+      height: 350px;
+      background: var(--color-primary-gold);
+      bottom: 15%;
+      right: 10%;
+      animation: floatLight 12s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes floatLight {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(50px, 30px) scale(1.1); }
+    }
+
+    /* Moving Dot Grid Pattern */
+    .bg-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(rgba(11, 92, 167, 0.08) 1.5px, transparent 1.5px);
+      background-size: 36px 36px;
+      z-index: 2;
+      pointer-events: none;
+      animation: gridMove 30s linear infinite;
+    }
+
+    /* Slowly Rotating Abstract Lines */
+    .bg-decor {
+      position: absolute;
+      border: 1px dashed rgba(11, 92, 167, 0.12);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      animation: spin 60s linear infinite;
+    }
+
+    .decor-1 {
+      width: 600px;
+      height: 600px;
+      top: -100px;
+      left: -150px;
+    }
+
+    .decor-2 {
+      width: 500px;
+      height: 500px;
+      bottom: -100px;
+      right: -100px;
+      border-style: double;
+      animation-duration: 90s;
+      animation-direction: reverse;
+    }
+
+    @keyframes gridMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 36px 72px; }
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+    /* Main Container */
+    .launch-container {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 600px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .logos-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .logo-img {
+      max-height: 120px;
+      width: auto;
+    }
+
+    .caricature-img {
+      max-height: 90px;
+      width: auto;
+    }
+
+    .title-banner h1 {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--color-primary-blue) 0%, #0F172A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
+
+    .title-banner p {
+      font-size: 1rem;
+      color: #475569;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* Countdown Display */
+    .countdown-display {
+      font-family: var(--font-serif);
+      font-size: 7rem;
+      font-weight: 800;
+      color: var(--color-primary-gold);
+      height: 150px;
+      line-height: 150px;
+      margin-top: 10px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-shadow: 0 0 30px rgba(223, 145, 38, 0.3);
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .countdown-display.launched-text {
+      font-size: 3.2rem;
+    }
+
+    /* Launch Button Container */
+    .button-container {
+      position: relative;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    /* Pulsing Launch Button */
+    .launch-btn {
+      background: linear-gradient(135deg, var(--color-primary-blue) 0%, #004b8d 100%);
+      color: white;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 
+        0 0 0 0px rgba(11, 92, 167, 0.4),
+        0 10px 30px rgba(0, 0, 0, 0.5),
+        inset 0 4px 12px rgba(255, 255, 255, 0.2);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      z-index: 5;
+      animation: pulseGlow 2s infinite;
+    }
+
+    .launch-btn span.icon {
+      font-size: 1.6rem;
+      transition: transform 0.3s ease;
+    }
+
+    .launch-btn:hover {
+      transform: scale(1.08);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 
+        0 0 40px rgba(11, 92, 167, 0.6),
+        0 15px 40px rgba(0, 0, 0, 0.6),
+        inset 0 4px 12px rgba(255, 255, 255, 0.3);
+    }
+
+    .launch-btn:hover span.icon {
+      transform: scale(1.2) translateY(-2px);
+    }
+
+    .launch-btn:active {
+      transform: scale(0.96);
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0px rgba(11, 92, 167, 0.4), 0 10px 30px rgba(0, 0, 0, 0.5); }
+      70% { box-shadow: 0 0 0 20px rgba(11, 92, 167, 0), 0 10px 30px rgba(0, 0, 0, 0.5); }
+      100% { box-shadow: 0 0 0 0px rgba(11, 92, 167, 0), 0 10px 30px rgba(0, 0, 0, 0.5); }
+    }
+
+    /* Halo Rings behind button */
+    .halo-ring {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border: 1px solid rgba(223, 145, 38, 0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: expandHalo 3s infinite linear;
+      opacity: 0;
+    }
+
+    .halo-2 { animation-delay: 1s; }
+    .halo-3 { animation-delay: 2s; }
+
+    @keyframes expandHalo {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(2.2); opacity: 0; border-color: rgba(11, 92, 167, 0); }
+    }
+
+    /* Page Fade-Out Transition Overlay */
+    .transition-shield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: white;
+      z-index: 99999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.05;
+      pointer-events: none;
+      transition: opacity 2s ease;
+    }
+    /* Responsive Media Queries */
+    @media (max-width: 600px) {
+      .launch-container {
+        padding: 15px;
+        gap: 20px;
+      }
+      .logos-wrapper {
+        gap: 15px;
+      }
+      .logo-img {
+        max-height: 80px;
+      }
+      .caricature-img {
+        max-height: 65px;
+      }
+      .title-banner h1 {
+        font-size: 2rem;
+      }
+      .title-banner p {
+        font-size: 0.9rem;
+        padding: 0 10px;
+      }
+      .countdown-display {
+        font-size: 4.5rem;
+        height: 120px;
+        margin-top: 5px;
+      }
+      .button-container {
+        height: 120px;
+        margin-top: 5px;
+      }
+      .launch-btn {
+        width: 110px;
+        height: 110px;
+        font-size: 0.95rem;
+      }
+      .halo-ring {
+        width: 110px;
+        height: 110px;
+      }
+      .countdown-display.launched-text {
+        font-size: 2.2rem !important;
+      }
+    }
+
+    /* Keyframe Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Patterns & Lights -->
+  <div class="bg-grid"></div>
+  <div class="bg-decor decor-1"></div>
+  <div class="bg-decor decor-2"></div>
+  <div class="bg-light light-blue"></div>
+  <div class="bg-light light-gold"></div>
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-laser-lights-background-loop-41851-large.mp4" type="video/mp4">
+  </video>
+
+  <!-- Launch Container -->
+  <div class="launch-container">
+    <div class="logos-wrapper">
+      <img src="assets/flame-logo.png" alt="FLAME Logo" class="logo-img">
+      <img src="assets/mla-initiative.png" alt="Minister's Initiative" class="caricature-img">
+    </div>
+
+    <div class="title-banner">
+      <h1 id="main-title">Official Launch Ceremony</h1>
+      <p id="main-desc">Press the button below to initiate the celebration and launch the official FLAME digital platform for Mannarkkad constituency.</p>
+    </div>
+
+    <!-- Countdown display element -->
+    <div class="countdown-display" id="timer">10</div>
+
+    <!-- Pulsing Launch Button -->
+    <div class="button-container" id="btn-wrap">
+      <div class="halo-ring halo-1"></div>
+      <div class="halo-ring halo-2"></div>
+      <div class="halo-ring halo-3"></div>
+      <button class="launch-btn" id="launch-trigger" onclick="startCeremony()">
+        <span class="icon">🚀</span>
+        <span>Launch</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Transition Shield -->
+  <div class="transition-shield" id="shield"></div>
+
+  <script>
+    let launching = false;
+
+    function startCeremony() {
+      if (launching) return;
+      launching = true;
+
+      // Hide Button, description, and show countdown
+      document.getElementById('btn-wrap').style.display = 'none';
+      document.getElementById('main-desc').style.opacity = '0.5';
+      document.getElementById('main-desc').textContent = 'Initialising launch sequences...';
+      
+      const timerEl = document.getElementById('timer');
+      timerEl.style.display = 'flex';
+      
+      let count = 10;
+      timerEl.textContent = count;
+
+      // Countdown Interval
+      // Countdown Interval
+      const interval = setInterval(() => {
+        count--;
+        if (count > 0) {
+          timerEl.textContent = count;
+        } else if (count === 0) {
+          clearInterval(interval); // Clear immediately to prevent double tick
+          timerEl.textContent = "Ignition! 🔥";
+          timerEl.style.fontSize = "4.5rem";
+          
+          // Wait 1.2 seconds to show Ignition, then execute fade transition
+          setTimeout(() => {
+            timerEl.style.transition = 'opacity 0.4s ease';
+            timerEl.style.opacity = '0';
+            
+            const descEl = document.getElementById('main-desc');
+            descEl.style.transition = 'opacity 0.4s ease';
+            descEl.style.opacity = '0';
+            
+            setTimeout(() => {
+              // Replace timer text with "FLAME Launched!" and apply text gradient
+              timerEl.textContent = "FLAME Launched! 🌟";
+              timerEl.classList.add('launched-text');
+              timerEl.style.background = "linear-gradient(135deg, var(--color-primary-blue) 0%, var(--color-primary-gold) 100%)";
+              timerEl.style.webkitBackgroundClip = "text";
+              timerEl.style.webkitTextFillColor = "transparent";
+              
+              descEl.textContent = "Igniting minds across Mannarkkad constituency...";
+              descEl.style.color = "#DF9126";
+              
+              // Fade elements back in
+              timerEl.style.opacity = '1';
+              descEl.style.opacity = '1';
+              
+              triggerLaunch();
+            }, 450);
+          }, 1200);
+        }
+      }, 1000);
+    }
+
+    function triggerLaunch() {
+      document.getElementById('bg-video').style.opacity = '0.22';
+
+      // 1. Trigger massive confetti bursts
+      const duration = 8 * 1000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10000 };
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      const confettiInterval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(confettiInterval);
+        }
+
+        const particleCount = 50 * (timeLeft / duration);
+        // Confetti from multiple angles
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+      }, 250);
+
+      // School of side bursts
+      confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+
+      // 2. Set LocalStorage launch token
+      localStorage.setItem('flame_launched', 'true');
+
+      // 3. Fade to white after celebration and redirect
+      setTimeout(() => {
+        const shield = document.getElementById('shield');
+        shield.style.opacity = '1';
+        
+        setTimeout(() => {
+          window.location.href = "index.html?launched=true";
+        }, 1100);
+      }, 8000);
+    }
+  </script>
+</body>
+</html>

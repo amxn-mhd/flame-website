@@ -7,6 +7,15 @@
   <meta name="description" content="Website of FLAME, a premier educational initiative of Adv. N. Samsudheen in Mannarkkad, Kerala to empower students.">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="assets/flame-favicon.png">
+  <script>
+    // Bypass the launch screen overlay if the site has been officially launched
+    const params = new URLSearchParams(window.location.search);
+    if (localStorage.getItem('flame_launched') === 'true' || params.get('launched') === 'true') {
+      const style = document.createElement('style');
+      style.textContent = '.launch-overlay { display: none !important; } body.lock-scroll { overflow: auto !important; height: auto !important; }';
+      document.head.appendChild(style);
+    }
+  </script>
 </head>
 <body class="lock-scroll">
 
