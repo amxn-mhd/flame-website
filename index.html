@@ -7,37 +7,8 @@
   <meta name="description" content="Website of FLAME, a premier educational initiative of Adv. N. Samsudheen in Mannarkkad, Kerala to empower students.">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="assets/flame-favicon.png">
-  <script>
-    // Bypass the launch screen overlay if the site has been officially launched
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('reset') === 'true') {
-      localStorage.removeItem('flame_launched');
-      window.location.href = window.location.pathname;
-    } else if (localStorage.getItem('flame_launched') === 'true' || params.get('launched') === 'true') {
-      const style = document.createElement('style');
-      style.textContent = '.launch-overlay { display: none !important; } body.lock-scroll { overflow: auto !important; height: auto !important; }';
-      document.head.appendChild(style);
-    }
-  </script>
 </head>
-<body class="lock-scroll">
-
-  <!-- Launching Soon Overlay -->
-  <div class="launch-overlay">
-    <!-- Interactive Background Blobs for Splash screen -->
-    <div class="floating-blob blob-1"></div>
-    <div class="floating-blob blob-2"></div>
-    
-    <div class="launch-content">
-      <div class="launch-logos-wrapper" style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 10px; flex-wrap: wrap;">
-        <img src="assets/flame-logo.png" alt="FLAME Logo" class="launch-logo" style="max-width: 200px; height: auto; display: block;">
-        <img src="assets/mla-initiative.png" alt="An Initiative of N. Samsudheen" class="launch-initiative" style="max-width: 180px; height: auto; display: block;">
-      </div>
-      <h1 class="launch-title">Launching Soon</h1>
-      <p class="launch-text">We are igniting the flame of knowledge and opportunity across the Mannarkkad constituency. Our official digital platform will be live shortly.</p>
-      <div class="launch-footer">&copy; 2026 FLAME. All rights reserved.</div>
-    </div>
-  </div>
+<body>
 
   <!-- Dynamic Interactive Spotlight Background -->
   <div class="interactive-bg">
