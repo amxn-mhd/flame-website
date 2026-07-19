@@ -10,7 +10,10 @@
   <script>
     // Bypass the launch screen overlay if the site has been officially launched
     const params = new URLSearchParams(window.location.search);
-    if (localStorage.getItem('flame_launched') === 'true' || params.get('launched') === 'true') {
+    if (params.get('reset') === 'true') {
+      localStorage.removeItem('flame_launched');
+      window.location.href = window.location.pathname;
+    } else if (localStorage.getItem('flame_launched') === 'true' || params.get('launched') === 'true') {
       const style = document.createElement('style');
       style.textContent = '.launch-overlay { display: none !important; } body.lock-scroll { overflow: auto !important; height: auto !important; }';
       document.head.appendChild(style);
