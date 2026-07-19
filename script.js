@@ -102,27 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- 7. Social Feed Tab Switcher ---
-  const tabButtons = document.querySelectorAll('.social-tab-btn');
-  const feedPanels = document.querySelectorAll('.social-feed-panel');
 
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const targetTab = btn.getAttribute('data-tab');
-
-      feedPanels.forEach(panel => {
-        panel.classList.remove('active');
-      });
-
-      const activePanel = document.getElementById(`${targetTab}-feed`);
-      if (activePanel) {
-        activePanel.classList.add('active');
-      }
-    });
-  });
 
   // --- 8. Achievements Timeline & Graph Handler ---
   const growthData = {
@@ -160,10 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
       year: "Academic Year 2025-26 (Peak)",
       title: "Scaling Educational Transformation",
       desc: "This academic year marks the peak of the FLAME initiative. Along with historic scholarship achievements, we launched specialized digital learning portals and established dedicated career counseling clinics across the Mannarkkad constituency.",
-      lss: 400, uss: 100, nmms: 80, sslc: 246, plustwo: 185,
+      lss: 445, uss: 77, nmms: 83, sslc: 259, plustwo: 174,
       features: [
         { icon: "🌟", title: "Minister's Merit Conclave", desc: "Constituency-wide recognition event honoring all A+ achievers in Mannarkkad." },
-        { icon: "⚡", title: "100% Digital Screen Integration", desc: "Completed digital infrastructure setup across select government school divisions." }
+        { icon: "💡", title: "Pedagogical Training & Quality Enhancement", desc: "Conducted specialized workshops for educators to adopt modern teaching practices and elevate classroom academic standards." }
       ]
     }
   };
@@ -177,10 +157,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const bars = {
     lss: { element: document.getElementById('bar-lss'), max: 500 },
-    uss: { element: document.getElementById('bar-uss'), max: 500 },
-    nmms: { element: document.getElementById('bar-nmms'), max: 500 },
-    sslc: { element: document.getElementById('bar-sslc'), max: 500 },
-    plustwo: { element: document.getElementById('bar-plustwo'), max: 500 }
+    uss: { element: document.getElementById('bar-uss'), max: 100 },
+    nmms: { element: document.getElementById('bar-nmms'), max: 100 },
+    sslc: { element: document.getElementById('bar-sslc'), max: 300 },
+    plustwo: { element: document.getElementById('bar-plustwo'), max: 200 }
   };
 
   function updateDashboard(yearKey) {
@@ -207,11 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const val = data[key];
       const heightPercent = (val / barInfo.max) * 100;
       
-      barInfo.element.style.height = `${heightPercent}%`;
-      
-      const valSpan = barInfo.element.querySelector('.bar-value');
-      if (valSpan) {
-        valSpan.textContent = val;
+      if (barInfo.element) {
+        barInfo.element.style.height = `${heightPercent}%`;
+        const valSpan = barInfo.element.querySelector('.bar-value');
+        if (valSpan) {
+          valSpan.textContent = val;
+        }
       }
     });
   }

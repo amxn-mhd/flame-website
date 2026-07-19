@@ -386,7 +386,7 @@
     </div>
 
     <!-- Countdown display element -->
-    <div class="countdown-display" id="timer">10</div>
+    <div class="countdown-display" id="timer">3</div>
 
     <!-- Pulsing Launch Button -->
     <div class="button-container" id="btn-wrap">
@@ -418,47 +418,42 @@
       const timerEl = document.getElementById('timer');
       timerEl.style.display = 'flex';
       
-      let count = 10;
+      let count = 3;
       timerEl.textContent = count;
 
-      // Countdown Interval
       // Countdown Interval
       const interval = setInterval(() => {
         count--;
         if (count > 0) {
           timerEl.textContent = count;
-        } else if (count === 0) {
-          clearInterval(interval); // Clear immediately to prevent double tick
-          timerEl.textContent = "Ignition! 🔥";
-          timerEl.style.fontSize = "4.5rem";
+        } else {
+          clearInterval(interval); // Clear immediately when count reaches 0
           
-          // Wait 1.2 seconds to show Ignition, then execute fade transition
+          // Fade out the numbers quickly
+          timerEl.style.transition = 'opacity 0.25s ease';
+          timerEl.style.opacity = '0';
+          
+          const descEl = document.getElementById('main-desc');
+          descEl.style.transition = 'opacity 0.25s ease';
+          descEl.style.opacity = '0';
+          
           setTimeout(() => {
-            timerEl.style.transition = 'opacity 0.4s ease';
-            timerEl.style.opacity = '0';
+            // Replace timer text with "FLAME Launched!" and apply text gradient
+            timerEl.textContent = "FLAME Launched! 🌟";
+            timerEl.classList.add('launched-text');
+            timerEl.style.background = "linear-gradient(135deg, var(--color-primary-blue) 0%, var(--color-primary-gold) 100%)";
+            timerEl.style.webkitBackgroundClip = "text";
+            timerEl.style.webkitTextFillColor = "transparent";
             
-            const descEl = document.getElementById('main-desc');
-            descEl.style.transition = 'opacity 0.4s ease';
-            descEl.style.opacity = '0';
+            descEl.textContent = "Igniting minds across Mannarkkad constituency...";
+            descEl.style.color = "#DF9126";
             
-            setTimeout(() => {
-              // Replace timer text with "FLAME Launched!" and apply text gradient
-              timerEl.textContent = "FLAME Launched! 🌟";
-              timerEl.classList.add('launched-text');
-              timerEl.style.background = "linear-gradient(135deg, var(--color-primary-blue) 0%, var(--color-primary-gold) 100%)";
-              timerEl.style.webkitBackgroundClip = "text";
-              timerEl.style.webkitTextFillColor = "transparent";
-              
-              descEl.textContent = "Igniting minds across Mannarkkad constituency...";
-              descEl.style.color = "#DF9126";
-              
-              // Fade elements back in
-              timerEl.style.opacity = '1';
-              descEl.style.opacity = '1';
-              
-              triggerLaunch();
-            }, 450);
-          }, 1200);
+            // Fade elements back in
+            timerEl.style.opacity = '1';
+            descEl.style.opacity = '1';
+            
+            triggerLaunch();
+          }, 300);
         }
       }, 1000);
     }
@@ -467,7 +462,7 @@
       document.getElementById('bg-video').style.opacity = '0.22';
 
       // 1. Trigger massive confetti bursts
-      const duration = 8 * 1000;
+      const duration = 6 * 1000;
       const animationEnd = Date.now() + duration;
       const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10000 };
 
@@ -502,7 +497,7 @@
         setTimeout(() => {
           window.location.href = "index.html?launched=true";
         }, 1100);
-      }, 8000);
+      }, 6000);
     }
   </script>
 </body>
